@@ -12,7 +12,7 @@ logging.basicConfig(
 
 import settings
 
-updater = Updater(token=settings.TELEGRAM_TOKEN)
+updater = Updater(token='1840913092:AAE_6XfurlMJdvX2SXaA2UotP0DsYhxkj1U')
 
 
 def start(update: Update, context: CallbackContext):
@@ -27,7 +27,7 @@ def search(update: Update, context: CallbackContext):
 
     if len(args) == 0:
         update.message \
-            .reply_text('Hech bo‘lmasa, nimadir kiriting. Misol uchun '
+            .reply_text('Enter the name of the place'
                         '/search Rome')
     else:
         search_text = ' '.join(args)
@@ -44,10 +44,10 @@ def search(update: Update, context: CallbackContext):
 
         if len(link):
             update.message \
-                .reply_text('Sizning so‘rovingiz bo‘yicha havola: ' + link[0])
+                .reply_text('Search request: ' + link[0])
         else:
             update.message \
-                .reply_text('Sizning so‘rovingiz bo‘yicha hech nima yo‘q')
+                .reply_text('Nothing has been found')
 
 
 dispatcher = updater.dispatcher
