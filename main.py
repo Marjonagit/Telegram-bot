@@ -17,9 +17,7 @@ updater = Updater(token=settings.TELEGRAM_TOKEN)
 
 def start(update: Update, context: CallbackContext):
     update.message \
-        .reply_text('Assalomu alaykum! IT sohasiga oid maʼlumot qidiruvchi '
-                    'botga xush kelibsiz! Biror nima izlash uchun /search '
-                    'va so‘rovingizni yozing. Misol uchun /search GitHub')
+        .reply_text('Hi. This bot shows you the latest weather')
 
 
 def search(update: Update, context: CallbackContext):
@@ -30,19 +28,17 @@ def search(update: Update, context: CallbackContext):
     if len(args) == 0:
         update.message \
             .reply_text('Hech bo‘lmasa, nimadir kiriting. Misol uchun '
-                        '/search GitHub')
+                        '/search Rome')
     else:
         search_text = ' '.join(args)
-        logging.info('sending request to Wikipedia API')
-        response = requests.get('https://uz.wikipedia.org/w/api.php', {
-            'action': 'opensearch',
+        logging.info('sending request to Weather API')
+        response = requests.get('https://api.openweathermap.org/data/2.5/weather', {
+            'appid': '4de8a578d7a6c6fe2bdd98537047ae2f',
             'search': search_text,
-            'limit': 1,
-            'namespace': 0,
-            'format': 'json',
+            
         })
 
-        logging.info('result from Wikipedia API')
+        logging.info('result from Weather API')
         result = response.json()
         link = result[3]
 
